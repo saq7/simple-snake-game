@@ -43,8 +43,21 @@ var Game = {
 
   generateApple: function(){
     // TODO: make sure apple only generates in free cells
-    var randomX = Math.floor(Math.random() * 40) * squareSize;
-    var randomY = Math.floor(Math.random() * 30) * squareSize;
+    var randomX, randomY
+    var collision = false
+    while (true) {
+      randomX = Math.floor(Math.random() * 40) * squareSize;
+      randomY = Math.floor(Math.random() * 30) * squareSize;
+      for(var i = 0; i<snake.length; i++){
+        if  (snake[i].x == randomX && snake[i].y == randomY) {
+          collision = true;
+          break;
+        };
+      };
+      if (!collision){
+        break;
+      }
+    };
 
     // Add new apple
     apple = game.add.sprite(randomX, randomY, 'apple');
